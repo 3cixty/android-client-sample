@@ -20,6 +20,7 @@ package com.threecixty.oauthsample;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -38,6 +39,9 @@ public class MainActivity extends Activity {
 	
 	private Button revokeToken;
 
+
+    private Button showGoFlow;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,8 +55,8 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent oauthIntent = new Intent(OAUTH_ACTION);
 				oauthIntent.setType("*/*");
-				oauthIntent.putExtra("app_key", "a6e90e87-f29b-4d6a-aed9-456d956b9532"); // your app key
-                oauthIntent.putExtra("app_id", "InriaTestApp"); // your app name
+				oauthIntent.putExtra("app_key", "c0976bd8-9496-4d1e-93b1-3534d7362704"); // your app key
+                oauthIntent.putExtra("app_id", "InriaTestApp678"); // your app name
 				oauthIntent.putExtra("app_name", "Test appp"); // your app name
 				
 				Intent chooser = Intent.createChooser(oauthIntent, "Authenticate with 3Cixty server");
@@ -81,6 +85,42 @@ public class MainActivity extends Activity {
 		});
 		revokeToken.setEnabled(false);
 
+        showGoFlow = (Button) findViewById(R.id.showGoFlow);
+        showGoFlow.setOnClickListener(new View.OnClickListener() { // revoke 3Cixty token
+
+            @Override
+            public void onClick(View v) {
+                if (token == null) {
+                    Toast.makeText(MainActivity.this, "3Cixty token is null", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
+                        GoflowUtils.GoflowAccount account;
+
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            account = GoflowUtils.getGoflowAccount(token);
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void aVoid) {
+                            if (account == null) {
+                                Toast.makeText(MainActivity.this, "Cannot retrieve your user info", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(MainActivity.this, "username = " + account.getUsername()
+                                        + "\npassword = " + account.getPassword(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    };
+                    task.execute();
+
+                }
+            }
+        });
+        showGoFlow.setEnabled(false);
+
 	}
 	
 	@Override
@@ -97,6 +137,7 @@ public class MainActivity extends Activity {
 					JSONObject jsonObj = new JSONObject(data.getStringExtra("3CixtyOAuth"));
 					token = jsonObj.getString("access_token");
 					revokeToken.setEnabled(true);
+                    showGoFlow.setEnabled(true);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -105,7 +146,10 @@ public class MainActivity extends Activity {
 				Toast.makeText(this, successful ? "successful" : "failed", Toast.LENGTH_LONG).show();
 				
 				// disable 'revokeToken' button
-				if (successful) revokeToken.setEnabled(false);
+				if (successful) {
+                    revokeToken.setEnabled(false);
+                    showGoFlow.setEnabled(false);
+                }
 			}
 		}
 	}
