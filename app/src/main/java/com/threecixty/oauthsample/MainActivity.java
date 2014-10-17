@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent oauthIntent = new Intent(OAUTH_ACTION);
 				oauthIntent.setType("*/*");
-				oauthIntent.putExtra("app_key", "c0976bd8-9496-4d1e-93b1-3534d7362704"); // your app key
+				oauthIntent.putExtra("app_key", "26798921-d2bb-43d5-bf95-c4e0deae3af0"); // your app key
                 oauthIntent.putExtra("app_id", "InriaTestApp678"); // your app name
 				oauthIntent.putExtra("app_name", "Test appp"); // your app name
 				
