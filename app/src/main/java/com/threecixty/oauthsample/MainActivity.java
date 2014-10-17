@@ -56,8 +56,6 @@ public class MainActivity extends Activity {
 				Intent oauthIntent = new Intent(OAUTH_ACTION);
 				oauthIntent.setType("*/*");
 				oauthIntent.putExtra("app_key", "26798921-d2bb-43d5-bf95-c4e0deae3af0"); // your app key
-                oauthIntent.putExtra("app_id", "InriaTestApp678"); // your app name
-				oauthIntent.putExtra("app_name", "Test appp"); // your app name
 				
 				Intent chooser = Intent.createChooser(oauthIntent, "Authenticate with 3Cixty server");
 			
