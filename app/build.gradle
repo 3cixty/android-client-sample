@@ -20,4 +20,7 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:20.0.0'
+    compile files('libs/goflow_android.jar')
+    compile files('libs/gson-2.2.4.jar')
+    compile files('libs/rabbitmq-client.jar')
 }
