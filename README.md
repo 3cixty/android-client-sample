@@ -1,14 +1,18 @@
-android-client-sample
+Welcome!
 =====================
 
-This module shows how to call 3Cixty OAuth app to get a 3Cixty access token and to revoke an existed 3Cixty token.
+This repository shows:
+
+1. How to call 3Cixty OAuth app to get a 3Cixty access token and to revoke an existed 3Cixty token. 
+
+
 
 Getting Started
 ================
 
-git clone https://github.com/3cixty/android-client-sample.git
+1. `git clone https://github.com/3cixty/android-client-sample.git`
 
-Open Android Studio
+2. Open [Android Studio](https://developer.android.com/sdk/installing/studio.html)
 
-Import the `android-client-sample` project
+3. Import the `android-client-sample` project (be sure to pick the `settings.gradle` file in the directory where you cloned this repo)
 
