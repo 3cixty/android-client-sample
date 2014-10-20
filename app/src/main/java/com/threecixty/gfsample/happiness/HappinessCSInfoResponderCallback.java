@@ -9,6 +9,7 @@ import com.ambientic.crowdsource.happiness.Happiness;
 import com.ambientic.crowdsource.happiness.HappinessRequest;
 import com.ambientic.crowdsource.happiness.Station;
 
+
 public class HappinessCSInfoResponderCallback implements CrowdSourcedReceiverCallback<Happiness, HappinessRequest> {
 
 	// XXX PGR

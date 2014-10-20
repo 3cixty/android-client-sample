@@ -12,6 +12,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.ambientic.crowdsource.core.CrowdSourcedCommonPullTask;
+import com.ambientic.crowdsource.core.CrowdSourcedPullCallback;
+import com.ambientic.crowdsource.core.CrowdSourcedPushCallback;
+import com.ambientic.crowdsource.core.CrowdSourcedPushTask;
+import com.ambientic.crowdsource.core.CrowdSourcedServerCallback;
+import com.ambientic.crowdsource.core.CrowdsourceManagerFactory;
+import com.ambientic.crowdsource.core.CrowdsourcingCallback;
+import com.ambientic.crowdsource.core.Incentives;
+import com.ambientic.crowdsource.happiness.Happiness;
+import com.ambientic.crowdsource.happiness.HappinessLevel;
+import com.ambientic.crowdsource.happiness.HappinessRequest;
+import com.ambientic.crowdsource.happiness.Station;
+import com.ambientic.incentive.core.IncentiveCallback;
+import com.ambientic.incentive.core.IncentiveItem;
+import com.threecixty.gfsample.happiness.HappinessCSInfoResponderCallback;
+import com.threecixty.gfsample.happiness.HappinessCSResponder;
+import com.threecixty.oauthsample.R;
+
+import java.util.List;
+
 
 /**
  * This activity manages a simple lsit of buttons that exercise the GoFlo API.
@@ -51,8 +71,8 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 
 	HappinessLevel hlevel = new HappinessLevel();
 
-	HappinessCSResponder responder1 = null;
-	HappinessCSResponder responder2 = null;
+	com.threecixty.gfsample.happiness.HappinessCSResponder responder1 = null;
+	com.threecixty.gfsample.happiness.HappinessCSResponder responder2 = null;
 
 	HappinessCSInfoRequester requester1 = null;
 	HappinessCSInfoRequester requester2 = null;
@@ -86,6 +106,7 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 					happiRequest.setStation(station1);
 					happiRequest.setTimstamp(System.currentTimeMillis());
 
+
 					HappinessCSInfoResponderCallback responderHandler = new HappinessCSInfoResponderCallback();
 					responderHandler.setValues(localHqppiness, station1, GoFlowMainActivity.this);
 
@@ -115,10 +136,10 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 					happiRequest.setStation(station2);
 					happiRequest.setTimstamp(System.currentTimeMillis());
 
-					HappinessCSInfoResponderCallback responderHandler = new HappinessCSInfoResponderCallback();
+					com.threecixty.gfsample.happiness.HappinessCSInfoResponderCallback responderHandler = new com.threecixty.gfsample.happiness.HappinessCSInfoResponderCallback();
 					responderHandler.setValues(localHqppiness, station2, GoFlowMainActivity.this);
 
-					responder2 = new HappinessCSResponder(Happiness.class, HappinessRequest.class, responderHandler);
+					responder2 = new com.threecixty.gfsample.happiness.HappinessCSResponder(Happiness.class, HappinessRequest.class, responderHandler);
 					responder2.startReceivingNotification(station2.getId());
 					buttonRcv2.setText("Unsubscribe St2");
 				} else {
@@ -470,25 +491,6 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 
 	}
 
-	// PushTask callback when sending response
-	//
-	public class CSCustomerReportCSPushCallback implements CrowdSourcedPushCallback<CSCustomerReport> {
 
-		@Override
-		public void failedPush(long requestId) {
-			System.out.println("CSCustomerReportCSPushCallback response failed");
-		}
-
-		@Override
-		public void successPush(long requestId) {
-			System.out.println("CSCustomerReportCSPushCallback response success");
-		}
-
-		@Override
-		public void delayedPush(long requestId) {
-			System.out.println("CSCustomerReportCSPushCallback response delayed");
-		}
-
-	}
 
 }
