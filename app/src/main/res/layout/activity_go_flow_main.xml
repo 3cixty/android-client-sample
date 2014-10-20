@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="${packageName}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/hello_world" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="66dp"
+        android:baselineAligned="true"
+        android:gravity="bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/button_rcv_st1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Subscribe St1" />
+
+        <Button
+            android:id="@+id/button_rcv_st2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Subscribe St2" />
+
+        <Button
+            android:id="@+id/button_ask_st1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Ask St1" />
+
+        <Button
+            android:id="@+id/button_ask_st2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Ask St2" />
+
+                <Button
+            android:id="@+id/button_snd_st1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Provide St1" />
+
+        <Button
+            android:id="@+id/button_snd_st2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Provide St2" />
+        
+                <Button
+            android:id="@+id/button_srv_st1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Query server St1" />
+
+        <Button
+            android:id="@+id/button_srv_st2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Query server St2" />
+    </LinearLayout>
+
+</RelativeLayout>
