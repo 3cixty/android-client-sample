@@ -3,7 +3,7 @@ Welcome!
 
 This repository shows:
 
-1. How to call 3Cixty OAuth app to get a 3Cixty access token and to revoke an existed 3Cixty token. 
+1. How to call 3cixty OAuth app to get a 3cixty access token and to revoke an existed 3cixty token. 
 
 
 
