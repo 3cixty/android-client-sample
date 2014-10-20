@@ -1,10 +1,7 @@
 /**
  * 
- * Copyright (c) 2014 Ambientic SAS
  */
-package com.ambientic.goflowapp;
-
-import java.util.List;
+package com.threecixty.gfsample;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,23 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ambientic.crowdsource.core.CrowdSourcedCommonPullTask;
-import com.ambientic.crowdsource.core.CrowdSourcedPullCallback;
-import com.ambientic.crowdsource.core.CrowdSourcedPushCallback;
-import com.ambientic.crowdsource.core.CrowdSourcedPushTask;
-import com.ambientic.crowdsource.core.CrowdSourcedServerCallback;
-import com.ambientic.crowdsource.core.CrowdsourceManagerFactory;
-import com.ambientic.crowdsource.core.CrowdsourcingCallback;
-import com.ambientic.crowdsource.core.Incentives;
-import com.ambientic.crowdsource.happiness.Happiness;
-import com.ambientic.crowdsource.happiness.HappinessLevel;
-import com.ambientic.crowdsource.happiness.HappinessRequest;
-import com.ambientic.crowdsource.happiness.Station;
-import com.ambientic.goflow.happiness.HappinessCSInfoResponderCallback;
-import com.ambientic.goflow.happiness.HappinessCSResponder;
-import com.ambientic.goflow.report.CSCustomerReport;
-import com.ambientic.incentive.core.IncentiveCallback;
-import com.ambientic.incentive.core.IncentiveItem;
+
 
 /**
  * This activity manages a simple lsit of buttons that exercise the GoFlo API.
