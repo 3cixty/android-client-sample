@@ -209,38 +209,6 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 				CrowdSourcedPushTask<Happiness> pushTask = new CrowdSourcedPushTask<Happiness>(station1.getId(), Happiness.class, callback);
 				long reqId = pushTask.sendData(localHqppiness);
 				System.out.println("send data with reqid " + reqId);
-				// should wait for callback ?
-				// try {
-				// Thread.sleep(100);
-				// } catch (InterruptedException e) {
-				// }
-				// pushTask.terminate();
-
-				// //
-				// CSCustomerReportCSPushCallback callback2 = new
-				// CSCustomerReportCSPushCallback();
-				//
-				// CustomerReport content = new CustomerReport();
-				// content.setComment("another random comment " +
-				// System.currentTimeMillis());
-				// content.setTitle("title");
-				// content.setOwner("me");
-				//
-				// CSCustomerReport report = new CSCustomerReport();
-				// report.setCrowdSourcedValue(content);
-				// report.setHotSpot(station1);
-				//
-				// CrowdSourcedResponsePushTask<CSCustomerReport> pushTask2 = new
-				// CrowdSourcedResponsePushTask<CSCustomerReport>(station1.getId(),
-				// CSCustomerReport.class, callback2);
-				// pushTask2.sendData(report);
-				// // should wait for callback ?
-				// try {
-				// Thread.sleep(1000);
-				// } catch (InterruptedException e) {
-				// }
-				// pushTask2.terminate();
-
 			}
 		});
 		buttonSnd2 = (Button) findViewById(R.id.button_snd_st2);
@@ -256,12 +224,6 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 				CrowdSourcedPushTask<Happiness> pushTask = new CrowdSourcedPushTask<Happiness>(station2.getId(), Happiness.class, callback);
 				long reqId = pushTask.sendData(localHqppiness);
 				System.out.println("send data with reqid " + reqId);
-				// should wait for callback ?
-				// try {
-				// Thread.sleep(100);
-				// } catch (InterruptedException e) {
-				// }
-				// pushTask.terminate();
 			}
 		});
 		//
