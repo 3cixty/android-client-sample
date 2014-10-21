@@ -57,6 +57,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent goflowIntent = new Intent(MainActivity.this, GoFlowMainActivity.class);
+                goflowIntent.putExtra("token",token);
                 startActivityForResult(goflowIntent, GOFLOW_REQUEST_ID);
             }
         });

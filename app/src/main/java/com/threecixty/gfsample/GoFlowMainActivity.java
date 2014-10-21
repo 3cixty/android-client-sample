@@ -28,6 +28,7 @@ import com.ambientic.incentive.core.IncentiveCallback;
 import com.ambientic.incentive.core.IncentiveItem;
 import com.threecixty.gfsample.happiness.HappinessCSInfoResponderCallback;
 import com.threecixty.gfsample.happiness.HappinessCSResponder;
+import com.threecixty.oauthsample.GoflowUtils;
 import com.threecixty.oauthsample.R;
 
 import java.io.IOException;
@@ -251,7 +252,16 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 		//
 		//
 
-		monitor = new CrowdsourcingMonitor();
+        Intent startIntent = getIntent();
+        String accessToken = startIntent.getStringExtra("token");
+
+        GoflowUtils.GoflowAccount gfaccount = GoflowUtils.getGoflowAccount(accessToken);
+        String appId = gfaccount.getUsername();
+        String user = gfaccount.getUsername();
+        String pwd = gfaccount.getPassword();
+
+
+        monitor = new CrowdsourcingMonitor();
 
 		hlevel.setLevel(2);
 		hlevel.setDescription("xxx");
@@ -267,7 +277,7 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
             // (userid and pwd) to be used
             // when initializing the crowdsourcing middleware.
 
-            CrowdsourceManagerFactory.getSingleton().setUserCredentials("YOUR APPID", "GOFLOW USERID", "GOFLOW PWD");
+            CrowdsourceManagerFactory.getSingleton().setUserCredentials(appId, user, pwd);
 
         } catch (Exception e) {
 			e.printStackTrace();

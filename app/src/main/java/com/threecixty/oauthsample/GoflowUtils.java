@@ -76,7 +76,7 @@ public class GoflowUtils {
 
             JSONObject jsonObj = new JSONObject(buffer.toString());
 
-            return new GoflowAccount(jsonObj.getString("username"), jsonObj.getString("password"));
+            return new GoflowAccount(jsonObj.getString("appid"),jsonObj.getString("username"), jsonObj.getString("password"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,10 +121,12 @@ public class GoflowUtils {
     public static class GoflowAccount {
         private String username;
         private String password;
+        private String appId;
 
-        public GoflowAccount(String username, String password) {
+        public GoflowAccount(String appId, String username, String password) {
             this.username = username;
             this.password = password;
+            this.appId = appId;
         }
 
         public String getUsername() {
@@ -134,5 +136,11 @@ public class GoflowUtils {
         public String getPassword() {
             return password;
         }
+
+        public String getAppId() {
+            return appId;
+        }
+
+
     }
 }
