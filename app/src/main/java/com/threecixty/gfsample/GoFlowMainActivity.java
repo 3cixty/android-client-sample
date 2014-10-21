@@ -30,6 +30,7 @@ import com.threecixty.gfsample.happiness.HappinessCSInfoResponderCallback;
 import com.threecixty.gfsample.happiness.HappinessCSResponder;
 import com.threecixty.oauthsample.R;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -299,7 +300,14 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 			args[1] = monitor;
 			args[2] = Incentives.FUN;
 			CrowdsourceManagerFactory.getSingleton().initCrowdsourcing(args);
-		} catch (Exception e) {
+
+            // following 3Cixty registration, you can download your GoFlow credentials
+            // (userid and pwd) to be used
+            // when initializing the crowdsourcing middleware.
+
+            CrowdsourceManagerFactory.getSingleton().setUserCredentials("YOUR APPID", "GOFLOW USERID", "GOFLOW PWD");
+
+        } catch (Exception e) {
 			e.printStackTrace();
 		}
 
