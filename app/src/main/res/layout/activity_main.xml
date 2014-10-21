@@ -16,4 +16,6 @@
 
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Show GoFlow Account" android:id="@+id/showGoFlow"/>
 
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Start Goflow" android:id="@+id/startGoflow"/>
+
 </LinearLayout>

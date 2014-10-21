@@ -17,25 +17,28 @@
 package com.threecixty.oauthsample;
 
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.threecixty.gfsample.GoFlowMainActivity;
+
 public class MainActivity extends Activity {
 	
 	private static final int OAUTH_REQUEST_ID = 101; // any number you want
 	private static final String OAUTH_ACTION = "com.threecixty.oauth.OAUTH"; // intent action for 3Cixty OAuth android app
-	
-	private String token;
+
+    private static final int GOFLOW_REQUEST_ID = 102; // any number you want
+
+    private String token;
 	
 	private Button revokeToken;
 
@@ -46,7 +49,18 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
+        Button startGoflow = (Button) findViewById(R.id.startGoflow);
+
+        startGoflow.setOnClickListener(new View.OnClickListener() { // show 3Cixty token
+
+            @Override
+            public void onClick(View v) {
+                Intent goflowIntent = new Intent(MainActivity.this, GoFlowMainActivity.class);
+                startActivityForResult(goflowIntent, GOFLOW_REQUEST_ID);
+            }
+        });
+
 		Button showToken = (Button) findViewById(R.id.showToken);
 		
 		showToken.setOnClickListener(new View.OnClickListener() { // show 3Cixty token
@@ -123,34 +137,36 @@ public class MainActivity extends Activity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == OAUTH_REQUEST_ID && resultCode == RESULT_OK) {
-			if (data.hasExtra("3CixtyOAuth")) { // result for getting 3Cixty token
-				// print your 3Cixty token
-				System.out.println(data.getStringExtra("3CixtyOAuth"));
-				Toast.makeText(this, data.getStringExtra("3CixtyOAuth"), Toast.LENGTH_LONG).show();
-				
-				// enable 'revokeToken' button
-				try {
-					JSONObject jsonObj = new JSONObject(data.getStringExtra("3CixtyOAuth"));
-					token = jsonObj.getString("access_token");
-					revokeToken.setEnabled(true);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == OAUTH_REQUEST_ID && resultCode == RESULT_OK) {
+            if (data.hasExtra("3CixtyOAuth")) { // result for getting 3Cixty token
+                // print your 3Cixty token
+                System.out.println(data.getStringExtra("3CixtyOAuth"));
+                Toast.makeText(this, data.getStringExtra("3CixtyOAuth"), Toast.LENGTH_LONG).show();
+
+                // enable 'revokeToken' button
+                try {
+                    JSONObject jsonObj = new JSONObject(data.getStringExtra("3CixtyOAuth"));
+                    token = jsonObj.getString("access_token");
+                    revokeToken.setEnabled(true);
                     showGoFlow.setEnabled(true);
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			} else if (data.hasExtra("3CixtyRevokeResponse")) { // result for revoking 3Cixty token
-				boolean successful = data.getBooleanExtra("3CixtyRevokeResponse", false);
-				Toast.makeText(this, successful ? "successful" : "failed", Toast.LENGTH_LONG).show();
-				
-				// disable 'revokeToken' button
-				if (successful) {
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else if (data.hasExtra("3CixtyRevokeResponse")) { // result for revoking 3Cixty token
+                boolean successful = data.getBooleanExtra("3CixtyRevokeResponse", false);
+                Toast.makeText(this, successful ? "successful" : "failed", Toast.LENGTH_LONG).show();
+
+                // disable 'revokeToken' button
+                if (successful) {
                     revokeToken.setEnabled(false);
                     showGoFlow.setEnabled(false);
                 }
-			}
-		}
-	}
+            }
+        } else if (requestCode == GOFLOW_REQUEST_ID && resultCode == RESULT_OK) {
+
+        }
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
