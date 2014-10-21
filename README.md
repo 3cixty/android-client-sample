@@ -4,6 +4,7 @@ Welcome!
 This repository shows:
 
 1. How to call 3cixty OAuth app to get a 3cixty access token and to revoke an existed 3cixty token. 
+2. How to call the 3cixty platform to get Golfow account
 
 
 
