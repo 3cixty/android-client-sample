@@ -5,6 +5,7 @@ package com.threecixty.gfsample;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -254,37 +255,66 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 
         Intent startIntent = getIntent();
         String accessToken = startIntent.getStringExtra("token");
-
-        GoflowUtils.GoflowAccount gfaccount = GoflowUtils.getGoflowAccount(accessToken);
-        String appId = gfaccount.getUsername();
-        String user = gfaccount.getUsername();
-        String pwd = gfaccount.getPassword();
-
+        System.out.println("access token ="+ startIntent);
 
         monitor = new CrowdsourcingMonitor();
 
-		hlevel.setLevel(2);
-		hlevel.setDescription("xxx");
+        hlevel.setLevel(2);
+        hlevel.setDescription("xxx");
 
-		try {
-			Object[] args = new Object[3];
-			args[0] = this.getApplicationContext();
-			args[1] = monitor;
-			args[2] = Incentives.FUN;
-			CrowdsourceManagerFactory.getSingleton().initCrowdsourcing(args);
+        try {
+            Object[] args = new Object[3];
+            args[0] = this.getApplicationContext();
+            args[1] = monitor;
+            args[2] = Incentives.FUN;
+            CrowdsourceManagerFactory.getSingleton().initCrowdsourcing(args);
 
-            // following 3Cixty registration, you can download your GoFlow credentials
-            // (userid and pwd) to be used
-            // when initializing the crowdsourcing middleware.
-
-            CrowdsourceManagerFactory.getSingleton().setUserCredentials(appId, user, pwd);
-
+            new InitOperation().execute(accessToken);
         } catch (Exception e) {
-			e.printStackTrace();
-		}
-
+            e.printStackTrace();
+        }
 	}
 
+
+    private class InitOperation extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String accessToken = "81849f3a-9f1f-4aec-84bd-a405e7b3d2f1";
+            //String accessToken = "ya29.pQDEF6fbQMeOkiwJ-GumbrW9dWn6wKV7Wo-u7HgJGNEFAGN8H1YJsof754TGuzofh4_avm1udaYjTQ";
+
+            GoflowUtils.GoflowAccount gfaccount = GoflowUtils.getGoflowAccount(accessToken);
+            String appId = gfaccount.getUsername();
+            String user = gfaccount.getUsername();
+            String pwd = gfaccount.getPassword();
+
+            System.out.println("info from goflow account : appId="+ appId+ " user="+user+ " pwd="+pwd);
+
+
+                // following 3Cixty registration, you can download your GoFlow credentials
+                // (userid and pwd) to be used
+                // when initializing the crowdsourcing middleware.
+
+            try {
+                CrowdsourceManagerFactory.getSingleton().setUserCredentials(appId, user, pwd);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -310,11 +340,11 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 	@Override
 	public void failedServer() {
 		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				myText.setText("No res from server");
-			}
-		});
+            @Override
+            public void run() {
+                myText.setText("No res from server");
+            }
+        });
 	}
 
 	/*
@@ -350,11 +380,11 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 	@Override
 	public void failedPull() {
 		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				myText.setText("failed");
-			}
-		});
+            @Override
+            public void run() {
+                myText.setText("failed");
+            }
+        });
 
 	}
 
