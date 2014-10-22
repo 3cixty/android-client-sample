@@ -16,4 +16,5 @@ Getting Started
 2. Open [Android Studio](https://developer.android.com/sdk/installing/studio.html)
 
 3. Import the `android-client-sample` project (be sure to pick the `settings.gradle` file in the directory where you cloned this repo)
+4. Replace the line 58  `oauthIntent.putExtra("app_key", "26798921-d2bb-43d5-bf95-c4e0deae3af0");` of the `https://github.com/3cixty/android-client-sample/blob/master/app/src/main/java/com/threecixty/oauthsample/MainActivity.java` class with your appkey
 
