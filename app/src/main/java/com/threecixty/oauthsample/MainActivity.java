@@ -41,17 +41,15 @@ public class MainActivity extends Activity {
     private String token;
 	
 	private Button revokeToken;
-
-
     private Button showGoFlow;
+    private Button startGoflow;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-        Button startGoflow = (Button) findViewById(R.id.startGoflow);
-
+        startGoflow = (Button) findViewById(R.id.startGoflow);
         startGoflow.setOnClickListener(new View.OnClickListener() { // show 3Cixty token
 
             @Override
@@ -61,16 +59,16 @@ public class MainActivity extends Activity {
                 startActivityForResult(goflowIntent, GOFLOW_REQUEST_ID);
             }
         });
+        startGoflow.setEnabled(false);
 
 		Button showToken = (Button) findViewById(R.id.showToken);
-		
 		showToken.setOnClickListener(new View.OnClickListener() { // show 3Cixty token
 			
 			@Override
 			public void onClick(View v) {
 				Intent oauthIntent = new Intent(OAUTH_ACTION);
 				oauthIntent.setType("*/*");
-				oauthIntent.putExtra("app_key", "26798921-d2bb-43d5-bf95-c4e0deae3af0"); // your app key
+				oauthIntent.putExtra("app_key", "b620bc7f-82ff-42f2-bcc2-452fee30e3a2"); // your app key
 				
 				Intent chooser = Intent.createChooser(oauthIntent, "Authenticate with 3Cixty server");
 			
@@ -151,6 +149,7 @@ public class MainActivity extends Activity {
                     token = jsonObj.getString("access_token");
                     revokeToken.setEnabled(true);
                     showGoFlow.setEnabled(true);
+                    startGoflow.setEnabled(true);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -162,6 +161,7 @@ public class MainActivity extends Activity {
                 if (successful) {
                     revokeToken.setEnabled(false);
                     showGoFlow.setEnabled(false);
+                    startGoflow.setEnabled(false);
                 }
             }
         } else if (requestCode == GOFLOW_REQUEST_ID && resultCode == RESULT_OK) {

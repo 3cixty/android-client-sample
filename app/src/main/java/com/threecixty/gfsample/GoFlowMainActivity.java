@@ -253,9 +253,10 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 		//
 		//
 
+
+        // retrieves the 3cixty access token from the intent parameters
         Intent startIntent = getIntent();
         String accessToken = startIntent.getStringExtra("token");
-        System.out.println("access token ="+ startIntent);
 
         monitor = new CrowdsourcingMonitor();
 
@@ -269,6 +270,7 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
             args[2] = Incentives.FUN;
             CrowdsourceManagerFactory.getSingleton().initCrowdsourcing(args);
 
+            // launch goflow in separate thread
             new InitOperation().execute(accessToken);
         } catch (Exception e) {
             e.printStackTrace();
@@ -277,24 +279,19 @@ public class GoFlowMainActivity extends Activity implements CrowdSourcedPullCall
 
 
     private class InitOperation extends AsyncTask<String, Void, String> {
+        GoflowUtils.GoflowAccount gfaccount;
+
         @Override
         protected String doInBackground(String... params) {
-            String accessToken = "81849f3a-9f1f-4aec-84bd-a405e7b3d2f1";
-            //String accessToken = "ya29.pQDEF6fbQMeOkiwJ-GumbrW9dWn6wKV7Wo-u7HgJGNEFAGN8H1YJsof754TGuzofh4_avm1udaYjTQ";
+            String accessToken = params[0];
 
-            GoflowUtils.GoflowAccount gfaccount = GoflowUtils.getGoflowAccount(accessToken);
-            String appId = gfaccount.getUsername();
+            gfaccount = GoflowUtils.getGoflowAccount(accessToken);
+            String appId = gfaccount.getAppid();
             String user = gfaccount.getUsername();
             String pwd = gfaccount.getPassword();
 
-            System.out.println("info from goflow account : appId="+ appId+ " user="+user+ " pwd="+pwd);
-
-
-                // following 3Cixty registration, you can download your GoFlow credentials
-                // (userid and pwd) to be used
-                // when initializing the crowdsourcing middleware.
-
             try {
+                // will start goflow platform
                 CrowdsourceManagerFactory.getSingleton().setUserCredentials(appId, user, pwd);
             } catch (Exception e) {
                 e.printStackTrace();

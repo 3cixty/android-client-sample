@@ -57,17 +57,6 @@ public class GoflowUtils {
             con.setRequestMethod("GET");
             con.setRequestProperty("access_token", _3cixtyAccessToken);
 
-            con.setDoInput(true);
-            con.setInstanceFollowRedirects(false);
-            con.setUseCaches(false);
-            con.connect();
-
-            int HttpResult = con.getResponseCode();
-            if (HttpResult != HttpURLConnection.HTTP_OK) {
-                System.out.println ("UNABLE TO CONNECT ? resp  code="+HttpResult);
-                return null;
-            }
-
             InputStream input = null;
             try {
                 input = con.getInputStream();
