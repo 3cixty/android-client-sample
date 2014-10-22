@@ -121,7 +121,8 @@ public class MainActivity extends Activity {
                                 Toast.makeText(MainActivity.this, "Cannot retrieve your user info", Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(MainActivity.this, "username = " + account.getUsername()
-                                        + "\npassword = " + account.getPassword(), Toast.LENGTH_LONG).show();
+                                        + "\npassword = " + account.getPassword()
+                                        + "\nappid = " + account.getAppid(), Toast.LENGTH_LONG).show();
                             }
                         }
                     };
