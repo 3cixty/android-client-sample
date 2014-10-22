@@ -11,6 +11,7 @@ This repository shows:
 Getting Started
 ================
 
+1. Install the [application] (https://play.google.com/store/apps/details?id=com.threecixty.auth&hl=en) 
 1. `git clone https://github.com/3cixty/android-client-sample.git`
 
 2. Open [Android Studio](https://developer.android.com/sdk/installing/studio.html)
