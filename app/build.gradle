@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'android'
 
 android {
     compileSdkVersion 20
@@ -12,12 +12,21 @@ android {
 
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     compile 'com.android.support:support-v4:20.0.0'
+    compile(name:'3cixty-oauth', ext:'aar')
+    compile 'com.google.android.gms:play-services:+'
+    compile 'com.facebook.android:facebook-android-sdk:3.21.1'
 }

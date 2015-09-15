@@ -24,25 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-  
-        
-<!-- 
-        <activity
-            android:name="eu.threecixty.oauth.android.ScopesActivity"
-            android:label="@string/title_activity_scopes" >
-        </activity>
-      -->   
-        <!-- 
-        <activity
-            android:name="eu.threecixty.oauthsample.ScopesActivity"
-            android:label="@string/title_activity_scopes" >
-        </activity>
-        <activity
-            android:name="eu.threecixty.oauthsample.ThreeCixtyActivity"
-            android:label="@string/title_activity_three_cixty" >
-        </activity>
-         -->
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>

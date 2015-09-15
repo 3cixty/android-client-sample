@@ -30,10 +30,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends Activity {
 	
 	private static final int OAUTH_REQUEST_ID = 101; // any number you want
-	private static final String OAUTH_ACTION = "com.threecixty.oauth.OAUTH"; // intent action for 3Cixty OAuth android app
+	private static final String OAUTH_ACTION = "com.threecixty.oauth.OAUTH"; // intent action for 3cixty OAuth android app
 	
 	private String token;
 	
@@ -45,37 +48,41 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+        System.out.println(format.format(new Date()));
 		setContentView(R.layout.activity_main);
 		
 		Button showToken = (Button) findViewById(R.id.showToken);
 		
-		showToken.setOnClickListener(new View.OnClickListener() { // show 3Cixty token
+		showToken.setOnClickListener(new View.OnClickListener() { // show 3cixty token
 			
 			@Override
 			public void onClick(View v) {
 				Intent oauthIntent = new Intent(OAUTH_ACTION);
 				oauthIntent.setType("*/*");
-				oauthIntent.putExtra("app_key", "26798921-d2bb-43d5-bf95-c4e0deae3af0"); // your app key
+				// TODO: replace your app key with the dumb app key in the following line
+				oauthIntent.putExtra("app_key", "26798921-d2bb-43d5-bf95-c4e0deae3af0");
 				
-				Intent chooser = Intent.createChooser(oauthIntent, "Authenticate with 3Cixty server");
+				Intent chooser = Intent.createChooser(oauthIntent, "Authenticate with 3cixty server");
 			
 				startActivityForResult(chooser, OAUTH_REQUEST_ID);
 			}
 		});
 		
 		revokeToken = (Button) findViewById(R.id.revokeToken);
-		revokeToken.setOnClickListener(new View.OnClickListener() { // revoke 3Cixty token
+		revokeToken.setOnClickListener(new View.OnClickListener() { // revoke 3cixty token
 			
 			@Override
 			public void onClick(View v) {
 				if (token == null) {
-					Toast.makeText(MainActivity.this, "3Cixty token is null", Toast.LENGTH_SHORT).show();
+					Toast.makeText(MainActivity.this, "3cixty token is null", Toast.LENGTH_SHORT).show();
 				} else {
 					Intent oauthIntent = new Intent(OAUTH_ACTION);
 					oauthIntent.setType("*/*");
 					oauthIntent.putExtra("access_token", token);
 					
-					Intent chooser = Intent.createChooser(oauthIntent, "Authenticate with 3Cixty server");
+					Intent chooser = Intent.createChooser(oauthIntent, "Authenticate with 3cixty server");
 				
 					startActivityForResult(chooser, OAUTH_REQUEST_ID);
 				}
@@ -84,12 +91,12 @@ public class MainActivity extends Activity {
 		revokeToken.setEnabled(false);
 
         showGoFlow = (Button) findViewById(R.id.showGoFlow);
-        showGoFlow.setOnClickListener(new View.OnClickListener() { // revoke 3Cixty token
+        showGoFlow.setOnClickListener(new View.OnClickListener() { // revoke 3cixty token
 
             @Override
             public void onClick(View v) {
                 if (token == null) {
-                    Toast.makeText(MainActivity.this, "3Cixty token is null", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "3cixty token is null", Toast.LENGTH_SHORT).show();
                 } else {
 
                     AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
@@ -126,8 +133,8 @@ public class MainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == OAUTH_REQUEST_ID && resultCode == RESULT_OK) {
-			if (data.hasExtra("3CixtyOAuth")) { // result for getting 3Cixty token
-				// print your 3Cixty token
+			if (data.hasExtra("3CixtyOAuth")) { // result for getting 3cixty token
+				// print your 3cixty token
 				System.out.println(data.getStringExtra("3CixtyOAuth"));
 				Toast.makeText(this, data.getStringExtra("3CixtyOAuth"), Toast.LENGTH_LONG).show();
 				
@@ -135,12 +142,13 @@ public class MainActivity extends Activity {
 				try {
 					JSONObject jsonObj = new JSONObject(data.getStringExtra("3CixtyOAuth"));
 					token = jsonObj.getString("access_token");
+                    System.out.println(token);
 					revokeToken.setEnabled(true);
                     showGoFlow.setEnabled(true);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-			} else if (data.hasExtra("3CixtyRevokeResponse")) { // result for revoking 3Cixty token
+			} else if (data.hasExtra("3CixtyRevokeResponse")) { // result for revoking 3cixty token
 				boolean successful = data.getBooleanExtra("3CixtyRevokeResponse", false);
 				Toast.makeText(this, successful ? "successful" : "failed", Toast.LENGTH_LONG).show();
 				
